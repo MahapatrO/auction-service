@@ -18,3 +18,8 @@ You are ready to go!
 
 # goolge 
 1. aws dynamodb cloudformation yaml
+
+# install
+npm install @middy/core @middy/http-event-normalizer @middy/http-error-handler @middy/http-json-body-parser
+
+npm install http-errors
