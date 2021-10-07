@@ -4,7 +4,7 @@ import AWS from "aws-sdk";
 // import httpEventNormalizer from "@middy/http-event-normalizer";
 // import httpErrorHandler from "@middy/http-error-handler";
 
-// instaed above those we can callthe common middleware we have created
+// instaed above those we can call the common middleware we have created
 import commonMiddleware from "../lib/commonMiddleware";
 import createError from "http-errors";
 
@@ -25,7 +25,7 @@ async function getAuction(event, context) {
     auction = result.Item;
 
     if(!auction) {
-        throw new createError.NotFound(`Auctionwith ID: ${id} not found`)
+        throw new createError.NotFound(`Auction with ID: ${id} not found`)
     }
   } catch (error) {
     console.log(error);
@@ -34,7 +34,7 @@ async function getAuction(event, context) {
 
   return {
     statusCode: 201,
-    body: JSON.stringify(auctions),
+    body: JSON.stringify(auction),
   };
 }
 
