@@ -10,28 +10,33 @@ import createError from "http-errors";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-async function getAuction(event, context) {
+export async function getAuctionById(id) {
   let auction;
-  const { id } = event.pathParameters;
 
   try {
     const result = await dynamodb
       .get({
         TableName: process.env.AUCTIONS_TABLE_NAME,
-        Key: {id: id} // Or Key: {id} both are same.
+        Key: { id: id }, // Or Key: {id} both are same.
       })
       .promise();
 
     auction = result.Item;
 
-    if(!auction) {
-        throw new createError.NotFound(`Auction with ID: ${id} not found`)
+    if (!auction) {
+      throw new createError.NotFound(`Auction with ID: ${id} not found`);
     }
   } catch (error) {
     console.log(error);
     throw new createError.InternalServerError(error);
   }
 
+  return auction;
+}
+
+async function getAuction(event, context) {
+  const { id } = event.pathParameters;
+  const auction = await getAuctionById(id);
   return {
     statusCode: 201,
     body: JSON.stringify(auction),
@@ -44,4 +49,4 @@ async function getAuction(event, context) {
 //   .use(httpErrorHandler());
 
 // Instaed of this we can use common middleware we have created
-export const handler = commonMiddleware(getAuction)
+export const handler = commonMiddleware(getAuction);
