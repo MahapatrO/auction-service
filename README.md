@@ -1,6 +1,6 @@
-# Codingly.io: Base Serverless Framework Template
+# Project
 
-https://codingly.io
+auction Servic
 
 ## What's included
 * Folder structure used consistently across our projects.
