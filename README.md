@@ -1,6 +1,6 @@
 # Project
 
-auction Servic
+auction Service
 
 ## What's included
 * Folder structure used consistently across our projects.
